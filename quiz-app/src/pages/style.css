@@ -163,14 +163,14 @@ html{
 }
 
 
-.admin-container .ques-and-ans{
+.admin-container .ques-and-ans-inputs{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: wrap;
 }
 
-.admin-container .ques-and-ans input{
+.admin-container .ques-and-ans-inputs input{
   border: 1px solid #dddddd;
   outline: none;
   padding: 0.8em 1em;
@@ -210,4 +210,28 @@ html{
   text-align: center;
   width: 80%;
   margin: 1% auto;
+}
+
+.admin-container .ques-and-ans{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 1em;
+  padding: 0.5em;
+  width: 80%;
+  margin: 0.5% auto;
+  /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+}
+
+.admin-container .ques-and-ans p{
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+
+.admin-container .all-ques-container{
+  max-height: 40vh;
+  overflow: auto;
 }

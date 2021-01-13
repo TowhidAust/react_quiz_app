@@ -10,8 +10,8 @@ export default function Login() {
     });
 
     const [userPage, setUserLogin] = useState({
-        userEmail: '007towhid2016@gmail.com',
-        userPassword: '123456',
+        userEmail: 'user@gmail.com',
+        userPassword: 'user',
     });
 
     // Similar to componentDidMount and componentDidUpdate:
@@ -30,11 +30,15 @@ export default function Login() {
             alert("your email/password is not matched with admin. see if the email/password is correct");
             history.push('');
         }
-
     }
 
     const userButtonClickHandler = (e) =>{
-
+        if((userPage.userEmail === 'user@gmail.com') && (userPage.userPassword === 'user') ){
+            history.push('user');
+        }else{
+            alert("your email/password is not matched with user. see if the email/password is correct");
+            history.push('');
+        }
     }
 
 
@@ -44,16 +48,24 @@ export default function Login() {
                 adminEmail: e.target.value,
                 adminPassword: adminPage.adminPassword,
             });
+            setUserLogin({
+                userEmail: e.target.value,
+                userPassword: userPage.userPassword,
+            });
         }else if(type === 'password'){
             setAdminLogin({
                 adminEmail: adminPage.adminEmail,
                 adminPassword: e.target.value,
             });
+            setUserLogin({
+                userEmail: userPage.userEmail,
+                userPassword: e.target.value,
+            });
         }
 
     }
 
-    
+
     return (
         <div className="login-container">
             <div id="loginform">
