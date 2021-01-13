@@ -4,25 +4,16 @@ import { useHistory } from "react-router-dom";
 
 export default function Admin() {
     const history = useHistory();
-    const [questions, setQuestions] = useState([
-        {
-            question: 'What is the capital of Bangladesh?',
-            answer: 'Dhaka'
-        },
-
-        {
-            question: 'What is our victory Day?',
-            answer: '16th December'
-        }
-    ]);
+    const [questions, setQuestions] = useState([]);
 
     const [oneQuestion, setOneQuestion ] = useState('');
     const [oneAnswer, setOneAnswer ] = useState('');
 
-     // Similar to componentDidMount and componentDidUpdate:
-     useEffect(() => {
-        console.log("component did mount triggers on admin");
-    });
+    useEffect(() => {
+        localStorage.setItem('questionsData', JSON.stringify(questions));
+        let questionsData = JSON.parse(localStorage.getItem('questionsData'));
+        console.log(questionsData);
+    }, [questions])
     const logout = (e) => {
         history.push('/');
     }
