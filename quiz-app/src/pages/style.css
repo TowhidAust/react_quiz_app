@@ -235,3 +235,52 @@ html{
   max-height: 40vh;
   overflow: auto;
 }
+
+
+/* ==========User Page========= */
+.user-container{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-container .user-inner{
+  background: #FFFFFF;
+  width: 80%;
+  margin: auto;
+  padding: 3%;
+  border-radius: 1em;
+}
+
+.user-container .ques-and-ans-inputs{
+
+}
+.user-container .ques-and-ans-inputs input{
+  border: 1px solid #dddddd;
+  outline: none;
+  padding: 0.8em 1em;
+  width: 20em;
+  margin-right: 1em;
+  border-radius: 0.5em;
+}
+
+
+.user-container .submit-button{
+  border-radius: 25px;
+  width: 10em;
+  height: 40px;
+  font-size: 1rem;
+  color: white;
+  font-weight: 700;
+  background: rgb(34,193,195);
+  background: linear-gradient(90deg, #4D6FE5 0%,     rgb(151, 226, 231) 100%);
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  outline: none;
+  margin: 1em 0;
+}
+
+.user-container .submit-button:hover{
+  opacity: 0.8;
+}
