@@ -1,27 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
-    const [adminPage, loginButtonClick] = useState({
-        userEmail: 'towhidaustcse33@gmail.com',
+    const history = useHistory();
+    const [adminPage, setAdminLogin] = useState({
+        adminEmail: 'admintest@gmail.com',
+        adminPassword: 'admintest',
+    });
+
+    const [userPage, setUserLogin] = useState({
+        userEmail: '007towhid2016@gmail.com',
         userPassword: '123456',
-        userType: 'Admin'
     });
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
-        // Update the document title using the browser API
-        // document.title = `You clicked ${count} times`;
+        console.log("component did mount triggers");
     });
 
-    const loginButtonClickHandler = () =>{
+
+    
+
+    const loginButtonClickHandler = (e) =>{
         console.log(adminPage);
+        if((adminPage.adminEmail === 'admin@gmail.com') && (adminPage.adminPassword === 'admin') ){
+            history.push('admin');
+        }else{
+            alert("your email/password is not matched with admin. see if the email/password is correct");
+            history.push('');
+        }
+
     }
 
-    const userButtonClickHandler = () =>{
+    const userButtonClickHandler = (e) =>{
 
     }
 
+
+    const onchangeUserInputHander = (e, type) => {
+        if(type === 'text'){
+            setAdminLogin({
+                adminEmail: e.target.value,
+                adminPassword: adminPage.adminPassword,
+            });
+        }else if(type === 'password'){
+            setAdminLogin({
+                adminEmail: adminPage.adminEmail,
+                adminPassword: e.target.value,
+            });
+        }
+
+    }
+
+    
     return (
         <div className="login-container">
             <div id="loginform">
@@ -29,27 +61,26 @@ export default function Login() {
                 <div>
                     <div className="row">
                         <label>Email</label>
-                        <input type="email" placeholder="Enter Your email"/>
+                        <input onChange = {(e)=>{onchangeUserInputHander(e, 'text')}} type="email" placeholder="Enter Your email"/>
                     </div> 
                     <div className="row">
                         <label>Password</label>
-                        <input type="password" placeholder="Enter Your Password"/>
+                        <input onChange = {(e)=>{onchangeUserInputHander(e, 'password')}} type="password" placeholder="Enter Your Password"/>
                     </div>
                     <div id="button" className="row">
-                        <Link to="/admin?id=ID123" className="link">                            
-                            <button onClick = {()=>{loginButtonClickHandler()}}>Login as Admin</button>
-                        </Link>
-                        <Link to="/admin?id=ID123" className="link">                            
-                            <button onClick = {()=>{userButtonClickHandler()}}>Login as User</button>
-                        </Link>
+                                          
+                        <button onClick = {(e)=>{loginButtonClickHandler(e)}}>Login as Admin</button>
+                       
+                        <button onClick = {()=>{userButtonClickHandler()}}>Login as User</button>
+                        
                     </div>
                 </div>
                 <div id="alternativeLogin">
-                    <label>Or sign in with:</label>
+                    {/* <label>Or sign in with:</label> */}
                     <div id="iconGroup">
-                        <a href="#" id="facebookIcon"></a>
-                        <a href="#" id="twitterIcon"></a>
-                        <a href="#" id="googleIcon"></a>
+                        {/* <a href="/#" id="facebookIcon"></a>
+                        <a href="/#" id="twitterIcon"></a>
+                        <a href="/#" id="googleIcon"></a> */}
 
                     </div>
                 </div>

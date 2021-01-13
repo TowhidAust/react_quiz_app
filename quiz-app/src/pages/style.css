@@ -1,5 +1,6 @@
 
 
+/* =======Login Page======= */
 body{
     /* background: rgb(34,193,195); */
     background: #4D6FE5;
@@ -92,7 +93,7 @@ html{
   transition: opacity 0.25s ease-out;
   outline: none;
   width: 80%;
-    margin-left: 10%;
+  margin: 1% 0;
 }
 
 .row button:hover{
@@ -141,3 +142,72 @@ html{
 }
 
 
+
+
+
+/* ==========Admin page========== */
+
+.admin-container{
+  
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin-container .admin-inner{
+  background: #FFFFFF;
+  width: 80%;
+  margin: auto;
+  padding: 3%;
+  border-radius: 1em;
+}
+
+
+.admin-container .ques-and-ans{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+}
+
+.admin-container .ques-and-ans input{
+  border: 1px solid #dddddd;
+  outline: none;
+  padding: 0.8em 1em;
+  width: 20em;
+  margin-right: 1em;
+  border-radius: 0.5em;
+}
+
+.admin-container .submit-button{
+  border-radius: 25px;
+  width: 10em;
+  height: 40px;
+  font-size: 1rem;
+  color: white;
+  font-weight: 700;
+  background: rgb(34,193,195);
+  background: linear-gradient(90deg, #4D6FE5 0%,     rgb(151, 226, 231) 100%);
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  outline: none;
+  margin: 1em ;
+}
+
+.admin-container .submit-button:hover{
+  opacity: 0.8;
+}
+
+.admin-container .all-ques-heading{
+  text-align: center;
+}
+.admin-container .admin-heading{
+  text-align: center;
+}
+
+.admin-container .sub-title{
+  text-align: center;
+  width: 80%;
+  margin: 1% auto;
+}
