@@ -232,7 +232,7 @@ html{
 
 
 .admin-container .all-ques-container{
-  max-height: 40vh;
+  height: 40vh;
   overflow: auto;
 }
 
@@ -283,4 +283,18 @@ html{
 
 .user-container .submit-button:hover{
   opacity: 0.8;
+}
+
+.user-container .all-ques-container{
+  display: flex;
+  flex-flow: wrap;
+  height: 40vh;
+    overflow: auto;
+}
+.user-container .questions-and-answer-inputs{
+  width: 30em;
+}
+
+.user-container .marks-container{
+  width: 30em;
 }

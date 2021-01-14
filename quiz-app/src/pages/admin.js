@@ -5,19 +5,20 @@ import { useHistory } from "react-router-dom";
 export default function Admin() {
     const history = useHistory();
     const [questions, setQuestions] = useState([]);
-
+    const [localQues, setLocalQues] = useState('');
     const [oneQuestion, setOneQuestion ] = useState('');
     const [oneAnswer, setOneAnswer ] = useState('');
 
     useEffect(() => {
         localStorage.setItem('questionsData', JSON.stringify(questions));
-        let questionsData = JSON.parse(localStorage.getItem('questionsData'));
-        console.log(questionsData);
-    }, [questions])
+    }, [questions]);
+
+
+    
+
     const logout = (e) => {
         history.push('/');
     }
-
 
     // render all questions and answer
     const quesItems = questions.map((items, index) => (
@@ -26,7 +27,6 @@ export default function Admin() {
             <p>Correct Answer: {items.answer}</p> 
         </div>
     ));
-
 
     const onchangeInputHandler = async (e,type) => {
         if(type === 'question'){
@@ -51,6 +51,7 @@ export default function Admin() {
         }else{
             setQuestions([...questions, newQuestionData]);
         }
+
     }
 
 
@@ -60,7 +61,7 @@ export default function Admin() {
             <div className="admin-inner">
                 <p className="login-screen-redirect" onClick={(e)=>{logout(e)}}>Logout</p>
                 <h1 className="admin-heading">Admin Panel</h1>
-                <p className="sub-title">Here you can create your question and answers. First type your question and answer and click submit. You can create multiple questions.</p>
+                <p className="sub-title">Here you can create your question and answers. First type your question and answer and click submit. You can create multiple questions. After you finished making all questions don't reload the page as we are using local browser storage. simply logout and go to user account to see the updates.</p>
                 <div className="ques-and-ans-inputs">
                     <input onChange = {(e)=>{onchangeInputHandler(e, 'question')}} type="text" placeholder="Enter your question"/>
                     <input onChange = {(e)=>{onchangeInputHandler(e, 'answer')}} type="text" placeholder="Enter your answer"/>

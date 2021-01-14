@@ -13,6 +13,8 @@ export default function User() {
     const [oneSingleQuestion, setOneSingleQuestion] = useState('');
     const [oneSingleCorrectAnswer, setOneSingleCorrectAnswer] = useState('');
     const [id, setOneSingleID] = useState('');
+    const [totalMark, setTotalMark] = useState('');
+    const [obtainedMark, setObtainedMark] = useState('');
 
     useEffect(() => {
         console.log('compent did mount triggers');
@@ -24,7 +26,6 @@ export default function User() {
    
 
     useEffect(() => {
-
        if(oneSingleAnswer){
         setStudentSubmission([...studentSubmission, {
             id: id,
@@ -33,10 +34,8 @@ export default function User() {
             studentAnswer: oneSingleAnswer
         }]);
        }
-        
-        
-        console.log(oneSingleAnswer);
-    },[oneSingleAnswer,oneSingleQuestion,oneSingleCorrectAnswer]);
+    console.log(oneSingleAnswer);
+    },[oneSingleAnswer,oneSingleQuestion,oneSingleCorrectAnswer,id]);
 
 
 
@@ -69,7 +68,8 @@ export default function User() {
         // setOneSingleAnswer()
         console.log('state is', studentSubmission);
 
-        var newArray = [];
+        // modify the state with student onchange input field answers. so that we can know the final answer from the student asnswer array.
+        var newStudentAnsArray = [];
         studentSubmission.forEach(item => {
            var newItem = {
                id: item.id, 
@@ -78,31 +78,63 @@ export default function User() {
                studentAnswer: []
             };
             studentSubmission.forEach(innerItem => {
-              if(innerItem.id == item.id){
+              if(innerItem.id === item.id){
                   newItem.studentAnswer = newItem.studentAnswer.concat(innerItem.studentAnswer);
               }
            });
-          newArray.push(newItem);
+          newStudentAnsArray.push(newItem);
         });
 
-        console.log('finally', newArray);
+        console.log('finally', newStudentAnsArray);
 
 
 
 
 
+        // now remove the duplicate objects from the array and create a new object
         var obj = {};
-        for ( let i in newArray ){
-            obj[newArray[i]['id']] = newArray[i];
+        for ( let i in newStudentAnsArray ){
+            obj[newStudentAnsArray[i]['id']] = newStudentAnsArray[i];
         }
 
-        newArray = new Array();
+        newStudentAnsArray = [];
         for ( var key in obj ){
-            newArray.push(obj[key]);
+            newStudentAnsArray.push(obj[key]);
+        }
+        // finally set this to local storage
+        localStorage.setItem('studentAnswers', JSON.stringify(obj));
+        calculateObtainedMarks(obj);
+
+    }
+
+    const calculateObtainedMarks = (studentAnsObj) => {
+        let studentAnswers = JSON.parse(localStorage.getItem('studentAnswers'));
+        console.log("student answers", studentAnswers);
+        let markArr = [];
+        let obtainedMarkArr = [];
+        for(let index in studentAnswers){
+            // as we know the last index is the student ans so find the last index
+            let studAnsArrLength = studentAnswers[index].studentAnswer.length - 1;
+            let studentAns = studentAnswers[index].studentAnswer[studAnsArrLength];
+            let correctAns = studentAnswers[index].answer;
+
+            if(studentAns === correctAns){
+                markArr.push(1);
+                obtainedMarkArr.push(1);
+            }else{
+                markArr.push(0);
+            }
         }
 
-        console.log('obj',obj);
 
+        let totalMark = markArr.length;
+        let obtainedMark = obtainedMarkArr.length;
+
+        setTotalMark(totalMark);
+        setObtainedMark(obtainedMark);
+
+        console.log('total and obtained', totalMark, obtainedMark);
+        
     }
 
 
@@ -114,9 +146,17 @@ export default function User() {
                 <h1 className="user-heading">user Panel</h1>
                 <p className="sub-title">Here you can answer the questions. If your answer is matched with the correct answer then you will get the marks otherwise the answer will be treated as wrong answer.</p>
                 <div className="all-ques-container">
-                    <h3 className="all-ques-heading">All Questions:</h3>
-                    {renderData}
-                    <button onClick = {(e)=>{submitButtonClickHandler(e)}} className="submit-button">Submit</button>
+                    <div className="questions-and-answer-inputs">
+                        <h3 className="all-ques-heading">All Questions:</h3>
+                        {renderData}
+                        <button onClick = {(e)=>{submitButtonClickHandler(e)}} className="submit-button">Submit</button>
+                    </div>
+                    <div className="marks-container">
+                        <h3>Obtained Marks</h3>
+
+                        <p>Total Marks: {totalMark}</p>
+                        <p>Obtained Marks: {obtainedMark}</p>
+                    </div>
                 </div>
             </div>
         </div>
