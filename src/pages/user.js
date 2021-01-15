@@ -117,13 +117,21 @@ export default function User() {
             let studAnsArrLength = studentAnswers[index].studentAnswer.length - 1;
             let studentAns = studentAnswers[index].studentAnswer[studAnsArrLength];
             let correctAns = studentAnswers[index].answer;
-            markArr.push(1);
+
             if(studentAns === correctAns){
                 // markArr.push(1);
                 obtainedMarkArr.push(1);
             }else{
                 // markArr.push(0);
             }
+        }
+
+
+        // finding total marks
+        let questionsData = JSON.parse(localStorage.getItem('questionsData'));
+
+        for (let i in questionsData) {
+            markArr.push(1);
         }
 
 
